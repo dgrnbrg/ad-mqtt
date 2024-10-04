@@ -12,13 +12,13 @@ cfg = AD.Config()
 
 # Alarm Decoder ser2sock server location.
 cfg.alarm.host = options['alarm']['host']
-cfg.alarm.port = int(options['alarm'].get('port', 10000))
+cfg.alarm.port = options['alarm'].get('port', 10000)
 # To reset all zones to closed (not faulted) on startup, set this to True
 cfg.alarm.restore_on_startup = options['alarm'].get('restore_on_startup', True)
 
 # MQTT Broker connection
 cfg.mqtt.broker = os.environ['MQTT_HOST']
-cfg.mqtt.port = os.environ['MQTT_PORT']
+cfg.mqtt.port = int(os.environ['MQTT_PORT'])
 cfg.mqtt.username = os.environ['MQTT_USERNAME']
 cfg.mqtt.password = os.environ['MQTT_PASSWORD']
 # Optional encryption settings for the broker.
