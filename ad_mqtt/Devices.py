@@ -15,13 +15,14 @@ def init_devices(devices):
 
 
 class Zone:
-    def __init__(self, zone, entity, label, device_class=None):
+    def __init__(self, zone, entity, label, device_class=None, is_virtual=False):
         self.zone = zone   # int zone number
         self.entity = entity
         self.label = label
         self.faulted = None  # None=Unknown, True=faulted, False=clear
         self.has_battery = False
         self.unique_id = None
+        self.is_virtual = is_virtual
         self.device_class = device_class if device_class else \
                             guess_class((entity, label))
 
@@ -47,6 +48,7 @@ class_keywords = {
     "fire" : "smoke",
     "door" : "door",
     "window" : "window",
+    "heat": "heat",
     }
 
 

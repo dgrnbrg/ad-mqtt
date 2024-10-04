@@ -39,6 +39,7 @@ devices = [
     # Zone( zone_number, HAS_entity_name, description, device_class )
     AD.Zone(1, "fire", "Fire Alarm", "smoke"),
     AD.Zone(2, "basement_door", "Basement Door"),
+    AD.Zone(9, "virtual_zone", "Make sure you enabled the corresponding expander emulation in the alarm decoder", is_virtual=True),
     # RF zone ( serial_number, zone_number, HAS_entity_name, description )
     AD.RfZone( 12345, 25, "front_door", "Front Door"),
     AD.RfZone( 12345, 27, "dining_room_door", "Dining Room Door"),

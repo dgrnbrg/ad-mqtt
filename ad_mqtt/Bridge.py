@@ -1,6 +1,7 @@
 import datetime as DT
 import json
 import logging
+import functools
 
 LOG = logging.getLogger(__name__)
 
@@ -37,6 +38,8 @@ class Bridge:
 
         self.sensor_state_topic = "alarm/sensor/{entity}/state"
         self.sensor_battery_topic = "alarm/sensor/{entity}/battery"
+        self.virtual_zone_state_topic = "alarm/sensor/{entity}/virtual/state"
+        self.virtual_zone_set_topic = "alarm/sensor/{entity}/virtual/set"
 
         mqtt.signal_connected.connect(self.mqtt_connected)
 
@@ -52,6 +55,30 @@ class Bridge:
         self.mqtt.subscribe(self.panel_set_topic, qos, self.cb_panel_set)
         self.mqtt.subscribe(self.chime_set_topic, qos, self.cb_chime_set)
         self.mqtt.subscribe(self.bypass_set_topic, qos, self.cb_bypass_set)
+        for z in self.zones.values():
+            if z.is_virtual:
+                fault_entity = z.entity + '_fault'
+                fault_unique_id = z.unique_id + "_fault"
+                set_topic = self.virtual_zone_set_topic.format(
+                    unique_id=fault_entity, entity=fault_unique_id)
+                self.mqtt.subscribe(set_topic, qos, functools.partial(self.cb_virtual_fault_set, zone=z))
+
+    def cb_virtual_fault_set(self, client, user_data, message, zone):
+        topic = message.topic
+        msg = message.payload.decode("utf-8").strip()
+        is_faulted = (msg.lower() == "on")
+        LOG.info("Read virtual fault set '%s': '%s', will mark zone %s as %s", topic, msg, zone.zone, is_faulted)
+
+        payload = {"status" : "ON" if is_faulted else "OFF"}
+        fault_entity = zone.entity + '_fault'
+        fault_unique_id = zone.unique_id + "_fault"
+        state_topic = self.virtual_zone_state_topic.format(
+            unique_id=fault_entity, entity=fault_unique_id)
+        self.publish(state_topic, {}, payload)
+        if is_faulted:
+            self.ad.fault_zone(zone.zone)
+        else:
+            self.ad.clear_zone(zone.zone)
 
     def cb_panel_set(self, client, user_data, message):
         msg = message.payload.decode("utf-8")

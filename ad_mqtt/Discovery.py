@@ -181,6 +181,29 @@ class Discovery:
                     }
                 self.messages.append((topic, payload))
 
+            if z.is_virtual:
+                fault_entity = z.entity + '_fault'
+                fault_unique_id = z.unique_id + "_fault"
+                topic = f'homeassistant/switch/{fault_unique_id}/config'
+                state_topic = bridge.virtual_zone_state_topic.format(
+                    unique_id=fault_entity, entity=fault_unique_id)
+                set_topic = bridge.virtual_zone_set_topic.format(
+                    unique_id=fault_entity, entity=fault_unique_id)
+                payload = {
+                    'name' : z.label + ' Fault',
+                    'object_id' : fault_entity,
+                    'unique_id' : fault_unique_id,
+                    'device' : Discovery.device,
+                    'state_topic' : state_topic,
+                    'value_template' : '{{value_json.status}}',
+                    'json_attributes_topic' : state_topic,
+                    'json_attributes_template' : attr_templ,
+                    'command_topic' : set_topic,
+                    'qos' : 1,
+                    'retain' : True,
+                    }
+                self.messages.append((topic, payload))
+
     def mqtt_connected(self, device, connected):
         if not self.messages:
             return
