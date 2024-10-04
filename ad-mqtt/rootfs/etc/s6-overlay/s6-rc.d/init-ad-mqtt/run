@@ -5,17 +5,4 @@
 # Configures ad-mqtt
 # ==============================================================================
 
-# Migrate add-on data from the Home Assistant config folder,
-# to the add-on configuration folder.
-if ! bashio::fs.file_exists '/config/appdaemon.yaml' \
-    && bashio::fs.file_exists '/homeassistant/appdaemon/appdaemon.yaml'; then
-    shopt -s dotglob
-    mv /homeassistant/appdaemon/* /config/ \
-        || bashio::exit.nok "Failed to migrate AppDaemon configuration"
-fi
-
-# Creates initial AppDaemon configuration in case it is non-existing
-if ! bashio::fs.file_exists '/config/appdaemon.yaml'; then
-    cp -R /root/appdaemon/* /config/ \
-        || bashio::exit.nok 'Failed to create initial AppDaemon configuration'
-fi
+# Here we could do initialization if it was necessary

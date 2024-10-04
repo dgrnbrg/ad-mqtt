@@ -35,4 +35,4 @@ schema:
       entity: str
       label: str
       device_class: str?
-      is_virtual: bool
+      is_virtual: bool?
