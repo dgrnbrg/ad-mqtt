@@ -36,4 +36,4 @@ export MQTT_USER=$(bashio::services mqtt "username")
 export MQTT_PASSWORD=$(bashio::services mqtt "password")
 
 # Run the ad-mqtt
-exec python /root/run.py
+exec python /root/run-addon.py

@@ -34,7 +34,7 @@ RUN \
 # Copy root filesystem
 COPY rootfs /
 # Copy addon code and entrypoint
-COPY ad_mqtt /root/
+COPY ad_mqtt /root/ad_mqtt
 COPY run-addon.py /root/run-addon.py
 
 # Build arguments
