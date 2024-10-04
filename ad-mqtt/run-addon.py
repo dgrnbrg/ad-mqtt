@@ -12,7 +12,7 @@ cfg = AD.Config()
 
 # Alarm Decoder ser2sock server location.
 cfg.alarm.host = options['alarm']['host']
-cfg.alarm.port = options['alarm'].get('port', 10000)
+cfg.alarm.port = int(options['alarm'].get('port', 10000))
 # To reset all zones to closed (not faulted) on startup, set this to True
 cfg.alarm.restore_on_startup = options['alarm'].get('restore_on_startup', True)
 
