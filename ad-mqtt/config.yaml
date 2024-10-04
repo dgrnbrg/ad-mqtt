@@ -13,14 +13,26 @@ startup: application
 services:
   - mqtt:need
 options:
-  system_packages: []
-  python_packages: []
-  init_commands: []
+  alarm:
+    host: null
+    port: 10000
+    restore_on_startup: True
+    code: null
+  devices:
+    - zone: null
+      entity: null
+      label: null
+      is_virtual: False
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
-  system_packages:
-    - str
-  python_packages:
-    - str
-  init_commands:
-    - str
+  alarm:
+    host: str
+    port: int
+    restore_on_startup: bool
+    code: str
+  devices:
+    - zone: int
+      entity: str
+      label: str
+      device_class: str?
+      is_virtual: bool
