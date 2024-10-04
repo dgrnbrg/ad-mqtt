@@ -13,6 +13,7 @@ COPY requirements.txt /tmp/
 RUN \
     apk add --no-cache --virtual .build-dependencies \
         build-base=0.5-r3 \
+        git=2.43.5-r0 \
         python3-dev=3.11.10-r0 \
     \
     && apk add --no-cache \
@@ -34,7 +35,7 @@ RUN \
 # Copy root filesystem
 COPY rootfs /
 # Copy addon code and entrypoint
-COPY ad-mqtt /root/
+COPY ad_mqtt /root/
 COPY run-addon.py /root/run-addon.py
 
 # Build arguments
