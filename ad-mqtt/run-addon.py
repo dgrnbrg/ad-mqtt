@@ -27,7 +27,7 @@ cfg.mqtt.encryption.certfile = None
 cfg.mqtt.encryption.keyfile = None
 
 # Debugging information
-cfg.log.level = options['log_level']
+cfg.log.level = options['log_level'].upper()
 cfg.log.screen = True
 cfg.log.modules = ["ad_mqtt", "insteon_mqtt"]
 
