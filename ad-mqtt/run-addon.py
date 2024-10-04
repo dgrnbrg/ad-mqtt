@@ -17,10 +17,10 @@ cfg.alarm.port = options['alarm'].get('port', 10000)
 cfg.alarm.restore_on_startup = options['alarm'].get('restore_on_startup', True)
 
 # MQTT Broker connection
-cfg.mqtt.broker = os.env['MQTT_HOST']
-cfg.mqtt.port = os.env['MQTT_PORT']
-cfg.mqtt.username = os.env['MQTT_USERNAME']
-cfg.mqtt.password = os.env['MQTT_PASSWORD']
+cfg.mqtt.broker = os.environ['MQTT_HOST']
+cfg.mqtt.port = os.environ['MQTT_PORT']
+cfg.mqtt.username = os.environ['MQTT_USERNAME']
+cfg.mqtt.password = os.environ['MQTT_PASSWORD']
 # Optional encryption settings for the broker.
 cfg.mqtt.encryption.ca_cert = None
 cfg.mqtt.encryption.certfile = None
