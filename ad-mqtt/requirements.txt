@@ -1,4 +1,4 @@
 pyyaml>=3
 Jinja2>=2.1
 alarmdecoder
-git+https://github.com/TD22057/insteon-mqtt#egg=insteon-mqtt
+git+https://github.com/TD22057/insteon-mqtt@83ce11d876f58c548f438c9f1bbfa60b49e3e4b6#egg=insteon-mqtt
