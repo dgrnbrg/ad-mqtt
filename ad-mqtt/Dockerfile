@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:15.0.9
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:18.2.1
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -11,18 +11,19 @@ COPY requirements.txt /tmp/
 # Setup base
 # hadolint ignore=DL3003,DL3042
 RUN \
+    apk update && \
     apk add --no-cache --virtual .build-dependencies \
-        build-base=0.5-r3 \
-        git=2.43.5-r0 \
-        python3-dev=3.11.10-r0 \
+        build-base \
+        git \
+        python3-dev \
     \
     && apk add --no-cache \
-        py3-pip=23.3.1-r0 \
-        python3=3.11.10-r0 \
+        py3-pip \
+        python3 \
     \
     && pip install -r /tmp/requirements.txt \
     \
-    && cd /usr/lib/python3.11/site-packages/ \
+    && cd /usr/lib/python3.12/site-packages/ \
     \
     && find /usr \
         \( -type d -a -name test -o -name tests -o -name '__pycache__' \) \
