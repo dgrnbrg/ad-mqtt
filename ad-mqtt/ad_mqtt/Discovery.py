@@ -29,7 +29,7 @@ class Discovery:
                       '{{ ", " if not loop.last else "" }}'
                       '{% endfor %} }')
         payload = {
-            'object_id' : 'alarm_panel_mqtt',
+            'default_entity_id' : 'alarm_panel_mqtt',
             'unique_id' : 'admqtt_alarm_panel',
             'device' : Discovery.device,
             'state_topic' : bridge.panel_state_topic,
@@ -53,7 +53,7 @@ class Discovery:
         topic = 'homeassistant/sensor/admqtt_alarm_panel_battery/config'
         payload = {
             'name' : "Alarm Panel Battery",
-            'object_id' : "alarm_panel_battery",
+            'default_entity_id' : "alarm_panel_battery",
             'unique_id' : "admqtt_alarm_panel_battery",
             'device' : Discovery.device,
             'state_topic' : bridge.panel_battery_topic,
@@ -67,7 +67,7 @@ class Discovery:
         topic = 'homeassistant/binary_sensor/admqtt_alarm_panel_bypass/config'
         payload = {
             'name' : "Alarm Panel Bypass",
-            'object_id' : "alarm_panel_bypass",
+            'default_entity_id' : "alarm_panel_bypass",
             'unique_id' : "admqtt_alarm_panel_bypass",
             'device' : Discovery.device,
             'state_topic' : bridge.panel_bypass_topic,
@@ -83,7 +83,7 @@ class Discovery:
         topic = 'homeassistant/sensor/admqtt_alarm_panel_faulted/config'
         payload = {
             'name' : 'Alarm Faulted Zone',
-            'object_id' : 'alarm_panel_faulted',
+            'default_entity_id' : 'alarm_panel_faulted',
             'unique_id' : 'admqtt_alarm_panel_faulted',
             'device' : Discovery.device,
             'icon' : 'mdi:alarm-check',
@@ -99,7 +99,7 @@ class Discovery:
         topic = 'homeassistant/sensor/admqtt_alarm_panel_message/config'
         payload = {
             'name' : 'Alarm Panel Message',
-            'object_id' : 'alarm_panel_message',
+            'default_entity_id' : 'alarm_panel_message',
             'unique_id' : 'admqtt_alarm_panel_message',
             'device' : Discovery.device,
             'icon' : 'mdi:alarm-check',
@@ -113,7 +113,7 @@ class Discovery:
         topic = 'homeassistant/switch/admqtt_alarm_panel_chime/config'
         payload = {
             'name' : 'Alarm Chime',
-            'object_id' : 'alarm_panel_chime',
+            'default_entity_id' : 'alarm_panel_chime',
             'unique_id' : 'admqtt_alarm_panel_chime',
             'device' : Discovery.device,
             'icon' : 'mdi:bell-ring',
@@ -127,7 +127,7 @@ class Discovery:
         topic = 'homeassistant/switch/admqtt_alarm_panel_bypass/config'
         payload = {
             'name' : 'Alarm Bypass',
-            'object_id' : 'alarm_panel_bypass',
+            'default_entity_id' : 'alarm_panel_bypass',
             'unique_id' : 'admqtt_alarm_panel_bypass',
             'device' : Discovery.device,
             'icon' : 'mdi:bell-ring',
@@ -149,7 +149,7 @@ class Discovery:
                 unique_id=z.unique_id, entity=z.entity)
             payload = {
                 'name' : z.label,
-                'object_id' : z.entity,
+                'default_entity_id' : z.entity,
                 'unique_id' : z.unique_id,
                 'device' : Discovery.device,
                 'state_topic' : state_topic,
@@ -169,7 +169,7 @@ class Discovery:
                     unique_id=bat_unique_id, entity=bat_entity)
                 payload = {
                     'name' : z.label + ' Battery',
-                    'object_id' : bat_entity,
+                    'default_entity_id' : bat_entity,
                     'unique_id' : bat_unique_id,
                     'device' : Discovery.device,
                     'state_topic' : state_topic,
@@ -191,7 +191,7 @@ class Discovery:
                     unique_id=fault_entity, entity=fault_unique_id)
                 payload = {
                     'name' : z.label + ' Fault',
-                    'object_id' : fault_entity,
+                    'default_entity_id' : fault_entity,
                     'unique_id' : fault_unique_id,
                     'device' : Discovery.device,
                     'state_topic' : state_topic,
