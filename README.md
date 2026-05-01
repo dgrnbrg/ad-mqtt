@@ -56,3 +56,5 @@ Here's an example devices configuration:
 # Updating to newer Hassio base image
 
 Update `build.yaml` and `Dockerfile` to use the new hassio base image. It may be necessary to bump the python path that the `Dockerfile` switches into as well if the python version changed.
+
+You will need to check for updates from the home assistant apps view so that it pulls the repo before you trigger the rebuild. Otherwise it will stick with the installed version.
