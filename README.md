@@ -52,3 +52,7 @@ Here's an example devices configuration:
   device_class: motion
   is_virtual: true
 ```
+
+# Updating to newer Hassio base image
+
+Update `build.yaml` and `Dockerfile` to use the new hassio base image. It may be necessary to bump the python path that the `Dockerfile` switches into as well if the python version changed.
