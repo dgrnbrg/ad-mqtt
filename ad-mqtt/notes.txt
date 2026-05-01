@@ -56,3 +56,4 @@ sensor panel message:
       check_zone
       ready
       zone_bypassed
+
