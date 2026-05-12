@@ -11,6 +11,7 @@ arch:
 init: false
 startup: application
 hassio_api: true
+homeassistant_api: true
 services:
   - mqtt:need
 options:
