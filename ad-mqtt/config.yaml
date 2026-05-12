@@ -2,7 +2,7 @@
 name: ad-mqtt
 version: dev
 slug: ad-mqtt
-description: MQTT Bridge for AlarmDecoder
+description: MQTT Bridge for AlarmDecoder updated
 url: https://github.com/dgrnbrg/ad-mqtt
 arch:
   - aarch64
