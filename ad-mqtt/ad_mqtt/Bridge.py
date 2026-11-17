@@ -81,8 +81,20 @@ class Bridge:
             self.ad.clear_zone(zone.zone)
 
     def cb_panel_set(self, client, user_data, message):
+        if getattr(message, "retain", False):
+            LOG.warning("Ignoring retained panel set message on '%s'",
+                        message.topic)
+            return
+
         msg = message.payload.decode("utf-8")
         LOG.info("Read panel set '%s'", msg)
+
+        dev = getattr(self.ad, "_device", None)
+        if dev is not None and hasattr(dev, "is_connected") and not dev.is_connected():
+            LOG.warning("Ignoring panel set '%s': AlarmDecoder is not connected",
+                        msg)
+            return
+
         try:
             data = json.loads(msg)
         except:

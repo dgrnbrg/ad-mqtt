@@ -22,6 +22,11 @@ class Client (Link):
         self._init_vars()
 
     #-----------------------------------------------------------------------
+    def is_connected(self):
+        """Return True if the socket is connected and not closing."""
+        return self.socket is not None and not self.isClosing
+
+    #-----------------------------------------------------------------------
     def write(self, data):
         if not len(data):
             return

@@ -69,7 +69,7 @@ class Mqtt(Link):
         pass
 
     def __init__(self, host="127.0.0.1", port=1883, id=None,
-                 reconnect_dt=10):
+                 reconnect_dt=10, clean_session=True):
         """Construct an MQTT client.
 
         This will not actually connect to the broker until connect() is
@@ -99,6 +99,7 @@ class Mqtt(Link):
         self.keep_alive = 30
 
         self._reconnect_dt = reconnect_dt
+        self._clean_session = clean_session
         self._fd = None
 
         self.setup_client()
@@ -108,7 +109,8 @@ class Mqtt(Link):
         """ Create or reinitialise the MQTT client and set the callbacks.
         """
 
-        client_args = {'client_id': self.id, 'clean_session': False}
+        client_args = {'client_id': self.id,
+                       'clean_session': self._clean_session}
 
         if not hasattr(self, 'client'):
             self.client = paho.Client(**client_args)
