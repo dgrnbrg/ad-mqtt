@@ -11,12 +11,7 @@ COPY requirements.txt /tmp/
 # Setup base
 # hadolint ignore=DL3003,DL3042
 RUN \
-    apk update && \
-    apk add --no-cache --virtual .build-dependencies \
-        build-base \
-        python3-dev \
-    \
-    && apk add --no-cache \
+    apk add --no-cache \
         py3-pip \
         python3 \
     \
@@ -27,9 +22,7 @@ RUN \
     && find /usr \
         \( -type d -a -name test -o -name tests -o -name '__pycache__' \) \
         -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
-        -exec rm -rf '{}' + \
-    \
-    && apk del --no-cache --purge .build-dependencies
+        -exec rm -rf '{}' +
 
 # Copy root filesystem
 COPY rootfs /
