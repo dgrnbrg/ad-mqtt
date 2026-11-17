@@ -30,7 +30,7 @@ cfg.log.screen = False
 cfg.log.file = "log.txt"
 cfg.log.size_kb = 5000
 cfg.log.backup_count = 3
-cfg.log.modules = ["ad_mqtt", "insteon_mqtt"]
+cfg.log.modules = ["ad_mqtt"]
 
 # For possible device class values, see:
 # https://www.home-assistant.io/integrations/binary_sensor/#device-class

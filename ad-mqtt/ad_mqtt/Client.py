@@ -2,13 +2,13 @@
 import errno
 import logging
 import socket
-import insteon_mqtt.network as IN
+from .Link import Link
 import alarmdecoder.event as ADE
 
 LOG = logging.getLogger(__name__)
 
 
-class Client (IN.Link):
+class Client (Link):
     # Alarmdecoder signals to implement the device api.  Also need write().
     on_open = ADE.event.Event("Connected event.  f(link)")
     on_close = ADE.event.Event("Close event.  f(link)")
@@ -16,7 +16,7 @@ class Client (IN.Link):
     on_write = ADE.event.Event("Written db.  f(link, data)")
 
     def __init__(self, host='', port=10000, reconnect_dt=30):
-        IN.Link.__init__(self)
+        Link.__init__(self)
         self.addr = (host, port)
         self.reconnect_dt = reconnect_dt
         self._init_vars()

@@ -14,7 +14,7 @@ class Config:
         # Reset all zones to not faulted on startup
         self.alarm.restore_on_startup = False
 
-        # MQTT broker (names must match insteon-mqtt settings variables)
+        # MQTT broker (names must match Mqtt.load_config settings variables)
         self.mqtt = Data()
         self.mqtt.broker = '127.0.0.1'
         self.mqtt.port = 1883
@@ -35,4 +35,4 @@ class Config:
         self.log.file = None
         self.log.size_kb = 5000
         self.log.backup_count = 3
-        self.log.modules = ["ad_mqtt", "insteon_mqtt"]
+        self.log.modules = ["ad_mqtt"]

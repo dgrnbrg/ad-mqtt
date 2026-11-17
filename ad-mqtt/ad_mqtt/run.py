@@ -1,10 +1,11 @@
 import logging
 import alarmdecoder as AD
-import insteon_mqtt as IM
 from .Bridge import Bridge
 from .Client import Client
 from . import Devices
 from .Discovery import Discovery
+from .Mqtt import Mqtt
+from . import poll
 
 
 def setup_logging(log_cfg):
@@ -43,14 +44,14 @@ def run(cfg, alarm_code, devices, restore_all=False):
         decoder = AD.AlarmDecoder(ad_client)
         decoder._wire_events()
 
-        mqtt_client = IM.network.Mqtt(id="ad-mqtt")
-        # IM uses dict: cfg['a'] not cfg.a
+        mqtt_client = Mqtt(id="ad-mqtt")
+        # Mqtt.load_config uses dict: cfg['a'] not cfg.a
         mqtt_client.load_config(cfg.mqtt.__dict__)
 
         bridge = Bridge(mqtt_client, decoder, alarm_code, zones, rf_devices)
         discovery = Discovery(mqtt_client, bridge, zones)
 
-        loop = IM.network.poll.Manager()
+        loop = poll.Manager()
         loop.add(ad_client, connected=False)
         loop.add(mqtt_client, connected=False)
 

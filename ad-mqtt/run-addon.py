@@ -29,7 +29,7 @@ cfg.mqtt.encryption.keyfile = None
 # Debugging information
 cfg.log.level = options['log_level'].upper()
 cfg.log.screen = True
-cfg.log.modules = ["ad_mqtt", "insteon_mqtt"]
+cfg.log.modules = ["ad_mqtt"]
 
 # For possible device class values, see:
 # https://www.home-assistant.io/integrations/binary_sensor/#device-class
